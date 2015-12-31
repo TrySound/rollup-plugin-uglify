@@ -1,4 +1,7 @@
-# rollup-plugin-uglify
+# rollup-plugin-uglify [![Travis Build Status][travis-img]][travis]
+
+[travis-img]: https://travis-ci.org/TrySound/rollup-plugin-uglify.svg
+[travis]: https://travis-ci.org/TrySound/rollup-plugin-uglify
 
 [Rollup](https://github.com/rollup/rollup) plugin to minify generated bundle.
 
