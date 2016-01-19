@@ -3,16 +3,14 @@ import uglify from 'uglify-js';
 export default function (options = {}) {
 	return {
 		transformBundle(code) {
-			let uglifyOptions = {
-				fromString: true
-			};
+			options.fromString = true;
 
 			// trigger sourcemap generation
 			if (options.sourceMap !== false) {
-				uglifyOptions.outSourceMap = 'x';
+				options.outSourceMap = 'x';
 			}
 
-			let result = uglify.minify(code, uglifyOptions);
+			let result = uglify.minify(code, options);
 
 			// Strip sourcemaps comment and extra \n
 			if (result.map) {
