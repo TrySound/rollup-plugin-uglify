@@ -25,6 +25,9 @@ rollup({
 });
 ```
 
+## Warning
+[UglifyJS](https://github.com/mishoo/UglifyJS2), which this plugin is based on, does not support the ES2015 module syntax. Thus using this plugin with Rollup's default bundle format (`'es6'`) will not work and error out.
+
 # License
 
 MIT © [Bogdan Chadkin](mailto:trysound@yandex.ru)
