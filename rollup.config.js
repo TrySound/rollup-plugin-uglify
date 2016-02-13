@@ -7,5 +7,7 @@ export default {
         babel({
             presets: [ 'es2015-rollup' ]
         })
-    ]
+    ],
+    format: 'cjs',
+    dest: 'dist/index.js'
 };
