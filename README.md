@@ -27,6 +27,19 @@ rollup({
 
 ## Warning
 [UglifyJS](https://github.com/mishoo/UglifyJS2), which this plugin is based on, does not support the ES2015 module syntax. Thus using this plugin with Rollup's default bundle format (`'es6'`) will not work and error out.
+To work around this you can tell `rollup-plugin-uglify` to use the UglifyJS [harmony branch](https://github.com/mishoo/UglifyJS2/tree/harmony) by passing its `minify` function to minify your code.
+```js
+import { rollup } from 'rollup';
+import uglify from 'rollup-plugin-uglify';
+import { minify } from 'uglify-js';
+
+rollup({
+	entry: 'main.js',
+	plugins: [
+		uglify({}, minify)
+	]
+});
+```
 
 # License
 

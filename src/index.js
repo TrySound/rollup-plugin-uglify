@@ -1,6 +1,6 @@
 import uglify from 'uglify-js';
 
-export default function (options = {}) {
+export default function (options = {}, minifier = uglify.minify) {
     return {
         transformBundle(code) {
             options.fromString = true;
@@ -12,7 +12,7 @@ export default function (options = {}) {
                 options.outSourceMap = 'x';
             }
 
-            const result = uglify.minify(code, options);
+            const result = minifier(code, options);
 
             // Strip sourcemaps comment and extra \n
             if (result.map) {
