@@ -51,3 +51,31 @@ test('should minify with sourcemaps', t => {
         t.ok(result.map.mappings, 'source map has mappings');
     });
 });
+
+test('should allow passing minifier', t => {
+    const expectedCode = readFile('fixtures/plain-file.js', 'utf-8');
+    const testOptions = {
+        foo: 'bar'
+    };
+
+    return rollup({
+        entry: 'fixtures/plain-file.js',
+        plugins: [ uglify(testOptions, (code, options) => {
+            t.ok(code, 'has unminified code');
+            t.is(`${code}\n`,
+                expectedCode,
+                'expected file content is passed to minifier');
+            t.ok(options, 'has minifier options');
+            t.is(options.foo, 'bar', 'minifier gets custom options');
+
+            return { code };
+        })]
+    }).then(bundle => {
+        const result = bundle.generate();
+
+        t.ok(result.code, 'result has return code');
+        t.is(`${result.code}\n`,
+            expectedCode,
+            'result code has expected content');
+    });
+});
