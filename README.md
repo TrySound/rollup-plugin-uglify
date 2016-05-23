@@ -41,6 +41,27 @@ rollup({
 });
 ```
 
+## Examples
+
+### Comments
+
+If you'd like to preserve comments (for licensing for example), then you can specify a function to do this like so:
+
+```js
+uglify({
+  output: {
+    comments: function(node, comment) {
+        var text = comment.value;
+        var type = comment.type;
+        if (type == "comment2") {
+            // multiline comment
+            return /@preserve|@license|@cc_on/i.test(test);
+        }
+    }
+  }
+});
+```
+
 # License
 
 MIT © [Bogdan Chadkin](mailto:trysound@yandex.ru)
