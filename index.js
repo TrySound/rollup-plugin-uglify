@@ -1,6 +1,6 @@
-import uglify from 'uglify-js';
+import { minify } from 'uglify-js';
 
-export default function (options = {}, minifier = uglify.minify) {
+export default function uglify(options = {}, minifier = minify) {
 	return {
 		transformBundle(code) {
 			options.fromString = true;

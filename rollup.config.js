@@ -8,11 +8,11 @@ export default {
 	targets: [
 		{
 			format: 'cjs',
-			dest: 'dist/' + pkg.name + '.js'
+			dest: pkg['main']
 		},
 		{
 			format: 'es6',
-			dest: 'dist/' + pkg.name + '.mjs'
+			dest: pkg['jsnext:main']
 		}
 	]
 };
