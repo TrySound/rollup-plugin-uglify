@@ -1,79 +1,81 @@
-import test from 'ava';
-import { rollup } from 'rollup';
-import { minify } from 'uglify-js';
-import uglify from '..';
-import { readFileSync as readFile } from 'fs';
+const assert = require('assert');
+const { rollup } = require('rollup');
+const { minify } = require('uglify-js');
+const { readFileSync: readFile } = require('fs');
+const uglify = require('../');
 
-test('should minify', t => {
-    return rollup({
-        entry: 'fixtures/unminified.js',
-        plugins: [ uglify() ]
-    }).then(bundle => {
-        const unminified = readFile('fixtures/unminified.js', 'utf-8');
-        const result = bundle.generate({
-            format: 'cjs'
-        });
-        t.is(result.code, minify(unminified, { fromString: true }).code);
-    });
-});
+process.chdir('test');
 
-test('should minify via uglify options', t => {
-    return rollup({
-        entry: 'fixtures/empty.js',
-        plugins: [ uglify({
-            output: { comments: 'all' }
-        }) ]
-    }).then(bundle => {
-        const result = bundle.generate({
-            banner: '/* package name */',
-            format: 'cjs'
-        });
+describe('rollup-plugin-uglify', () => {
+	it('should minify', () => {
+		return rollup({
+			entry: 'fixtures/unminified.js',
+			plugins: [ uglify() ]
+		}).then(bundle => {
+			const unminified = readFile('fixtures/unminified.js', 'utf-8');
+			const result = bundle.generate({
+				format: 'cjs'
+			});
+			assert.equal(result.code, minify(unminified, { fromString: true }).code);
+		});
+	});
 
-        t.is(result.code, '/* package name */\n"use strict";');
-    });
-});
+	it('should minify via uglify options', () => {
+		return rollup({
+			entry: 'fixtures/empty.js',
+			plugins: [ uglify({
+				output: { comments: 'all' }
+			}) ]
+		}).then(bundle => {
+			const result = bundle.generate({
+				banner: '/* package name */',
+				format: 'cjs'
+			});
 
-test('should minify with sourcemaps', t => {
-    return rollup({
-        entry: 'fixtures/sourcemap.js',
-        plugins: [ uglify() ]
-    }).then(bundle => {
-        const result = bundle.generate({
-            format: 'cjs',
-            sourceMap: true
-        });
+			assert.equal(result.code, '/* package name */\n"use strict";');
+		});
+	});
 
-        t.ok(result.map, 'has a source map');
-        t.is(result.map.version, 3, 'source map has expected version');
-        t.ok(Array.isArray(result.map.sources), 'source map has sources array');
-        t.is(result.map.sources.length, 2, 'source map has two sources');
-        t.ok(Array.isArray(result.map.names), 'source maps has names array');
-        t.ok(result.map.mappings, 'source map has mappings');
-    });
-});
+	it('should minify with sourcemaps', () => {
+		return rollup({
+			entry: 'fixtures/sourcemap.js',
+			plugins: [ uglify() ]
+		}).then(bundle => {
+			const result = bundle.generate({
+				format: 'cjs',
+				sourceMap: true
+			});
 
-test('should allow passing minifier', t => {
-    const expectedCode = readFile('fixtures/plain-file.js', 'utf-8');
-    const testOptions = {
-        foo: 'bar'
-    };
+			assert.ok(result.map, 'has a source map');
+			assert.equal(result.map.version, 3, 'source map has expected version');
+			assert.ok(Array.isArray(result.map.sources), 'source map has sources array');
+			assert.equal(result.map.sources.length, 2, 'source map has two sources');
+			assert.ok(Array.isArray(result.map.names), 'source maps has names array');
+			assert.ok(result.map.mappings, 'source map has mappings');
+		});
+	});
 
-    return rollup({
-        entry: 'fixtures/plain-file.js',
-        plugins: [ uglify(testOptions, (code, options) => {
-            t.ok(code, 'has unminified code');
-            t.is(code, expectedCode.trim(),
-                'expected file content is passed to minifier');
-            t.ok(options, 'has minifier options');
-            t.is(options.foo, 'bar', 'minifier gets custom options');
+	it('should allow passing minifier', () => {
+		const expectedCode = readFile('fixtures/plain-file.js', 'utf-8');
+		const testOptions = {
+			foo: 'bar'
+		};
 
-            return { code };
-        })]
-    }).then(bundle => {
-        const result = bundle.generate();
+		return rollup({
+			entry: 'fixtures/plain-file.js',
+			plugins: [ uglify(testOptions, (code, options) => {
+				assert.ok(code, 'has unminified code');
+				assert.equal(code, expectedCode.trim(), 'expected file content is passed to minifier');
+				assert.ok(options, 'has minifier options');
+				assert.equal(options.foo, 'bar', 'minifier gets custom options');
 
-        t.ok(result.code, 'result has return code');
-        t.is(result.code, expectedCode.trim(),
-            'result code has expected content');
-    });
+				return { code };
+			})]
+		}).then(bundle => {
+			const result = bundle.generate();
+
+			assert.ok(result.code, 'result has return code');
+			assert.equal(result.code, expectedCode.trim(), 'result code has expected content');
+		});
+	});
 });
