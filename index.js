@@ -2,6 +2,8 @@ import { minify } from 'uglify-js';
 
 export default function uglify(options = {}, minifier = minify) {
 	return {
+		name: 'uglify',
+
 		transformBundle(code) {
 			options.fromString = true;
 			delete options.inSourceMap;
