@@ -62,6 +62,16 @@ uglify({
 });
 ```
 
+Alternatively, you can also choose to keep all comments (e.g. if a licensing header has already been prepended by a previous rollup plugin):
+
+```js
+uglify({
+  output: {
+    comments: 'all'
+  }
+});
+```
+
 # License
 
 MIT © [Bogdan Chadkin](mailto:trysound@yandex.ru)
