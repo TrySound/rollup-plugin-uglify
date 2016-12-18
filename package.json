@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "description": "Rollup plugin to minify generated bundle",
   "main": "dist/rollup-plugin-uglify.js",
-  "jsnext:main": "dist/rollup-plugin-uglify.mjs",
+  "jsnext:main": "dist/rollup-plugin-uglify.es.js",
   "files": [
     "dist"
   ],
