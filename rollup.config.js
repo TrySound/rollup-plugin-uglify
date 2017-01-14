@@ -11,7 +11,7 @@ export default {
 			dest: pkg['main']
 		},
 		{
-			format: 'es6',
+			format: 'es',
 			dest: pkg['jsnext:main']
 		}
 	]
