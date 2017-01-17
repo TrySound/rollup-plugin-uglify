@@ -31,6 +31,7 @@
   },
   "homepage": "https://github.com/TrySound/rollup-plugin-uglify#readme",
   "dependencies": {
+    "babel-code-frame": "^6.20.0",
     "uglify-js": "^2.6.1"
   },
   "devDependencies": {
