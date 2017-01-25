@@ -10,36 +10,36 @@ describe('rollup-plugin-uglify', () => {
 	it('should minify', () => {
 		return rollup({
 			entry: 'fixtures/unminified.js',
-			plugins: [ uglify() ]
+			plugins: [uglify()]
 		}).then(bundle => {
 			const unminified = readFile('fixtures/unminified.js', 'utf-8');
 			const result = bundle.generate({
 				format: 'cjs'
 			});
-			assert.equal(result.code, minify(unminified, { fromString: true }).code);
+			assert.equal(result.code.trim(), minify(unminified, { fromString: true }).code);
 		});
 	});
 
 	it('should minify via uglify options', () => {
 		return rollup({
 			entry: 'fixtures/empty.js',
-			plugins: [ uglify({
+			plugins: [uglify({
 				output: { comments: 'all' }
-			}) ]
+			})]
 		}).then(bundle => {
 			const result = bundle.generate({
 				banner: '/* package name */',
 				format: 'cjs'
 			});
 
-			assert.equal(result.code, '/* package name */\n"use strict";');
+			assert.equal(result.code.trim(), '/* package name */\n"use strict";');
 		});
 	});
 
 	it('should minify with sourcemaps', () => {
 		return rollup({
 			entry: 'fixtures/sourcemap.js',
-			plugins: [ uglify() ]
+			plugins: [uglify()]
 		}).then(bundle => {
 			const result = bundle.generate({
 				format: 'cjs',
@@ -63,7 +63,7 @@ describe('rollup-plugin-uglify', () => {
 
 		return rollup({
 			entry: 'fixtures/plain-file.js',
-			plugins: [ uglify(testOptions, (code, options) => {
+			plugins: [uglify(testOptions, (code, options) => {
 				assert.ok(code, 'has unminified code');
 				assert.equal(code, expectedCode.trim(), 'expected file content is passed to minifier');
 				assert.ok(options, 'has minifier options');
@@ -75,7 +75,7 @@ describe('rollup-plugin-uglify', () => {
 			const result = bundle.generate();
 
 			assert.ok(result.code, 'result has return code');
-			assert.equal(result.code, expectedCode.trim(), 'result code has expected content');
+			assert.equal(result.code.trim(), expectedCode.trim(), 'result code has expected content');
 		});
 	});
 });
