@@ -42,7 +42,7 @@ To work around this you can tell `rollup-plugin-uglify` to use the UglifyJS [har
 ```js
 import { rollup } from 'rollup';
 import uglify from 'rollup-plugin-uglify';
-import { minify } from 'uglify-js';
+import { minify } from 'uglify-js-harmony';
 
 rollup({
 	entry: 'main.js',
