@@ -1,6 +1,16 @@
 import { minify } from 'uglify-js';
+import frame from 'babel-code-frame';
+
+const frameOptionsDefaults = {
+	highlightCode: true,
+	linesAbove: 2,
+	linesBelow: 3,
+	forceColor: false
+};
 
 export default function uglify(options = {}, minifier = minify) {
+	let frameOptions = options.codeFrame ? Object.assign({}, frameOptionsDefaults, options.codeFrame) : frameOptionsDefaults;
+
 	return {
 		name: 'uglify',
 
@@ -14,7 +24,14 @@ export default function uglify(options = {}, minifier = minify) {
 				options.outSourceMap = 'x';
 			}
 
-			const result = minifier(code, options);
+			try {
+				var result = minifier(code, options);
+			} catch (error) {
+				console.error(frame(code, error.line, error.col, frameOptions));
+				console.error('Reason: ' + error.message);
+				// Throw again so rollup can catch and output as normal
+				throw error;
+			}
 
 			// Strip sourcemaps comment and extra \n
 			if (result.map) {
