@@ -16,7 +16,7 @@ describe('rollup-plugin-uglify', () => {
 			const result = bundle.generate({
 				format: 'cjs'
 			});
-			assert.equal(result.code, minify(unminified, { fromString: true }).code);
+			assert.equal(result.code, minify(unminified, { fromString: true }).code + '\n');
 		});
 	});
 
@@ -32,7 +32,7 @@ describe('rollup-plugin-uglify', () => {
 				format: 'cjs'
 			});
 
-			assert.equal(result.code, '/* package name */\n"use strict";');
+			assert.equal(result.code, '/* package name */\n"use strict";\n');
 		});
 	});
 
@@ -75,7 +75,7 @@ describe('rollup-plugin-uglify', () => {
 			const result = bundle.generate();
 
 			assert.ok(result.code, 'result has return code');
-			assert.equal(result.code, expectedCode.trim(), 'result code has expected content');
+			assert.equal(result.code, expectedCode, 'result code has expected content');
 		});
 	});
 });
