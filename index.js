@@ -5,13 +5,9 @@ export default function uglify(options = {}, minifier = minify) {
 		name: 'uglify',
 
 		transformBundle(code) {
-			options.fromString = true;
-			delete options.inSourceMap;
-			delete options.outSourceMap;
-
 			// trigger sourcemap generation
 			if (options.sourceMap !== false) {
-				options.outSourceMap = 'x';
+				options.sourceMap = true;
 			}
 
 			const result = minifier(code, options);
