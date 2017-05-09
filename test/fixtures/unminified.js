@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 var a = 5;
 
 if (a < 3) {

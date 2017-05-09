@@ -6,6 +6,8 @@ const uglify = require('../');
 
 process.chdir('test');
 
+const trim = str => str.replace(/\s+$/g, '');
+
 describe('rollup-plugin-uglify', () => {
 	it('should minify', () => {
 		return rollup({
@@ -16,7 +18,8 @@ describe('rollup-plugin-uglify', () => {
 			const result = bundle.generate({
 				format: 'cjs'
 			});
-			assert.equal(result.code, minify(unminified, { fromString: true }).code);
+
+			assert.equal(trim(result.code), trim('"use strict";var a=5;a<3&&console.log(4)'));
 		});
 	});
 
@@ -32,7 +35,7 @@ describe('rollup-plugin-uglify', () => {
 				format: 'cjs'
 			});
 
-			assert.equal(result.code, '/* package name */\n"use strict";');
+			assert.equal(trim(result.code), trim('/* package name */\n"use strict"'));
 		});
 	});
 
@@ -65,17 +68,19 @@ describe('rollup-plugin-uglify', () => {
 			entry: 'fixtures/plain-file.js',
 			plugins: [ uglify(testOptions, (code, options) => {
 				assert.ok(code, 'has unminified code');
-				assert.equal(code, expectedCode.trim(), 'expected file content is passed to minifier');
+				assert.equal(trim(code), trim(expectedCode), 'expected file content is passed to minifier');
 				assert.ok(options, 'has minifier options');
 				assert.equal(options.foo, 'bar', 'minifier gets custom options');
 
 				return { code };
 			})]
 		}).then(bundle => {
-			const result = bundle.generate();
+			const result = bundle.generate({
+        format: 'cjs'
+			});
 
 			assert.ok(result.code, 'result has return code');
-			assert.equal(result.code, expectedCode.trim(), 'result code has expected content');
+			assert.equal(trim(result.code), trim(expectedCode), 'result code has expected content');
 		});
 	});
 });
