@@ -56,7 +56,10 @@ test('allow passing minifier', () => {
         plugins: [
             uglify(testOptions, (code, options) => {
                 expect(code.trim()).toEqual(expectedCode.trim());
-                expect(options).toEqual(testOptions);
+                expect(options).toEqual({
+                    foo: 'bar',
+                    sourceMap: true
+                });
                 return { code };
             })
         ]
