@@ -1,6 +1,12 @@
 const minify = require('uglify-js').minify;
 
-function uglify(options = {}, minifier = minify) {
+function uglify(options, minifier) {
+    if (options === undefined) {
+        options = {};
+    }
+    if (minifier === undefined) {
+        minifier = minify;
+    }
     return {
         name: 'uglify',
 
