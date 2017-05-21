@@ -9,10 +9,13 @@ function uglify(userOptions, minifier) {
         name: 'uglify',
 
         transformBundle(code) {
-            return minifier(code, options);
+            const result = minifier(code, options);
+            if (result.error) {
+              throw result.error;
+            }
+            return result;
         }
     };
 }
 
 module.exports = uglify;
-

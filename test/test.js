@@ -1,6 +1,5 @@
 const assert = require('assert');
 const rollup = require('rollup').rollup;
-const minify = require('uglify-js').minify;
 const readFile = require('fs').readFileSync;
 const uglify = require('../');
 
@@ -70,12 +69,19 @@ test('allow passing minifier', () => {
 });
 
 test('throw error on uglify fail', () => {
-    const result = rollup({
+    return rollup({
         entry: 'test/fixtures/failed.js',
         plugins: [
-            uglify()
+            uglify({}, () => ({
+                error: Error('some error')
+            }))
         ]
+    }).then(bundle => {
+        bundle.generate({ format: 'es' });
+    }).then(() => {
+        expect(true).toBeFalsy();
+    }).catch(err => {
+        expect(err.toString()).toMatch(/some error/);
     });
-    return expect(result.catch(e => e.message)).resolves.toMatch(/Unexpected token/);
 });
 
