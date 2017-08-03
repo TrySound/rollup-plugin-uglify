@@ -23,7 +23,7 @@
   "author": "Bogdan Chadkin <trysound@yandex.ru>",
   "license": "MIT",
   "dependencies": {
-    "uglify-js": "^3.0.9"
+    "uglify-es": "^3.0.9"
   },
   "devDependencies": {
     "jest": "^20.0.3",
