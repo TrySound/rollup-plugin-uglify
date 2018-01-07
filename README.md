@@ -47,7 +47,7 @@ import { minify } from 'uglify-es';
 rollup({
     entry: 'main.js',
     plugins: [
-        uglify({}, minify)
+        uglify({}, minify.minify)
     ]
 });
 ```
