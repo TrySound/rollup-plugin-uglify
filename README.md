@@ -79,6 +79,16 @@ uglify({
 });
 ```
 
+Alternatively, you can also choose to keep all comments (e.g. if a licensing header has already been prepended by a previous rollup plugin):
+
+```js
+uglify({
+  output: {
+    comments: 'all'
+  }
+});
+```
+
 See [UglifyJS documentation](https://github.com/mishoo/UglifyJS2#keeping-comments-in-the-output) for further reference.
 
 # License
