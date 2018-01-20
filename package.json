@@ -7,7 +7,7 @@
     "index.js"
   ],
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest",
     "prepublish": "yarn test"
   },
   "repository": {
@@ -23,10 +23,11 @@
   "author": "Bogdan Chadkin <trysound@yandex.ru>",
   "license": "MIT",
   "dependencies": {
-    "uglify-js": "^3.0.9"
+    "uglify-js": "^3.3.7"
   },
   "devDependencies": {
-    "jest": "^20.0.3",
-    "rollup": "^0.41.6"
+    "jest": "^22.1.4",
+    "prettier": "^1.10.2",
+    "rollup": "^0.54.1"
   }
 }
