@@ -33,30 +33,7 @@ uglify(options, minifier)
 
 `options` – default: `{}`, type: `object`. [UglifyJS API options](https://github.com/mishoo/UglifyJS2#api-reference)
 
-`minifier` – default: `require('uglify-js').minify`, type: `function`. Module to use as a minifier. You can use other versions (or forks) of UglifyJS instead default one.
-
-## Warning
-
-[UglifyJS](https://github.com/mishoo/UglifyJS2), which this plugin is based on, does not support the ES2015 module syntax. Thus using this plugin with Rollup's default bundle format (`'es'`) will not work and error out.
-To work around this you can tell `rollup-plugin-uglify` to use the UglifyJS [unstable es version](https://github.com/mishoo/UglifyJS2) by passing its `minify` function to minify your code.
-```js
-import { rollup } from 'rollup';
-import uglify from 'rollup-plugin-uglify';
-import { minify } from 'uglify-es';
-
-rollup({
-    entry: 'main.js',
-    plugins: [
-        uglify({}, minify)
-    ]
-});
-```
-
-To install the experimental version of UglifyJS:
-
-```
-npm i uglify-es -D
-```
+`minifier` – default: `require('uglify-es').minify`, type: `function`. Module to use as a minifier. You can use other versions (or forks) of UglifyJS instead default one.
 
 ## Examples
 

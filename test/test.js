@@ -62,15 +62,15 @@ test("allow passing minifier", async () => {
 });
 
 test("throw error on uglify fail", async () => {
-  const bundle = await rollup({
-    input: "test/fixtures/failed.js",
-    plugins: [
-      uglify({}, () => ({
-        error: Error("some error")
-      }))
-    ]
-  });
   try {
+    const bundle = await rollup({
+      input: "test/fixtures/failed.js",
+      plugins: [
+        uglify({}, () => ({
+          error: Error("some error")
+        }))
+      ]
+    });
     await bundle.generate({ format: "es" });
     expect(true).toBeFalsy();
   } catch (err) {
