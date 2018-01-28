@@ -31,7 +31,7 @@ rollup({
 uglify(options, minifier)
 ```
 
-`options` – default: `{}`, type: `object`. [UglifyJS API options](https://github.com/mishoo/UglifyJS2#api-reference)
+`options` – default: `{}`, type: `object`. [UglifyJS API options](https://github.com/mishoo/UglifyJS2/tree/harmony#minify-options)
 
 `minifier` – default: `require('uglify-es').minify`, type: `function`. Module to use as a minifier. You can use other versions (or forks) of UglifyJS instead default one.
 
@@ -66,7 +66,7 @@ uglify({
 });
 ```
 
-See [UglifyJS documentation](https://github.com/mishoo/UglifyJS2#keeping-comments-in-the-output) for further reference.
+See [UglifyJS documentation](https://github.com/mishoo/UglifyJS2/tree/harmony/README.md) for further reference.
 
 # License
 
