@@ -1,9 +1,7 @@
-const minify = require("uglify-js").minify;
+const { codeFrameColumns } = require("@babel/code-frame");
+const { minify } = require("uglify-js");
 
-function uglify(userOptions, minifier) {
-  if (minifier === undefined) {
-    minifier = minify;
-  }
+function uglify(userOptions, minifier = minify) {
   const options = Object.assign({ sourceMap: true }, userOptions);
 
   return {
@@ -12,6 +10,10 @@ function uglify(userOptions, minifier) {
     transformBundle(code) {
       const result = minifier(code, options);
       if (result.error) {
+        const { message, line, col: column } = result.error;
+        console.error(
+          codeFrameColumns(code, { start: { line, column } }, { message })
+        );
         throw result.error;
       }
       return result;
@@ -19,4 +21,4 @@ function uglify(userOptions, minifier) {
   };
 }
 
-module.exports = uglify;
+exports.uglify = uglify;

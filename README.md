@@ -15,7 +15,7 @@ npm i rollup-plugin-uglify -D
 
 ```js
 import { rollup } from 'rollup';
-import uglify from 'rollup-plugin-uglify';
+import { uglify } from 'rollup-plugin-uglify';
 
 rollup({
     entry: 'main.js',

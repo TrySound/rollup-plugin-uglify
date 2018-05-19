@@ -1,4 +1,1 @@
-node_modules/
-coverage
-npm-debug.log
-dist
+node_modules

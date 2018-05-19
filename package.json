@@ -23,11 +23,16 @@
   "author": "Bogdan Chadkin <trysound@yandex.ru>",
   "license": "MIT",
   "dependencies": {
+    "@babel/code-frame": "^7.0.0-beta.47",
     "uglify-js": "^3.3.25"
   },
   "devDependencies": {
-    "jest": "^22.1.4",
-    "prettier": "^1.10.2",
-    "rollup": "^0.54.1"
+    "@babel/core": "^7.0.0-beta.47",
+    "@babel/preset-env": "^7.0.0-beta.47",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^22.4.4",
+    "jest": "^22.4.4",
+    "prettier": "^1.12.1",
+    "rollup": "^0.59.1"
   }
 }
