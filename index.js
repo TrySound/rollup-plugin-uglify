@@ -1,4 +1,4 @@
-const minify = require("uglify-es").minify;
+const minify = require("uglify-js").minify;
 
 function uglify(userOptions, minifier) {
   if (minifier === undefined) {
