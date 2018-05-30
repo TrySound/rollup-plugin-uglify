@@ -3,7 +3,9 @@
 [travis-img]: https://travis-ci.org/TrySound/rollup-plugin-uglify.svg
 [travis]: https://travis-ci.org/TrySound/rollup-plugin-uglify
 
-[Rollup](https://github.com/rollup/rollup) plugin to minify generated bundle.
+[Rollup](https://github.com/rollup/rollup) plugin to minify generated bundle. Uses [UglifyJS](https://github.com/mishoo/UglifyJS2) under the hood.
+
+_Note: uglify-js is able to transpile only es5 syntax. If you want to transpile es6+ syntax use [terser](https://github.com/TrySound/rollup-plugin-terser) instead_
 
 ## Install
 
