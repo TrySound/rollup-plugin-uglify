@@ -1,5 +1,5 @@
 const { codeFrameColumns } = require("@babel/code-frame");
-const { minify } = require("uglify-js");
+const { minify } = require("uglify-es");
 
 function uglify(userOptions, minifier = minify) {
   const options = Object.assign({ sourceMap: true }, userOptions);
