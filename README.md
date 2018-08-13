@@ -20,10 +20,10 @@ import { rollup } from 'rollup';
 import { uglify } from 'rollup-plugin-uglify';
 
 rollup({
-    entry: 'main.js',
-    plugins: [
-        uglify()
-    ]
+  entry: 'main.js',
+  plugins: [
+    uglify()
+  ]
 });
 ```
 
@@ -46,13 +46,12 @@ If you'd like to preserve comments (for licensing for example), then you can spe
 ```js
 uglify({
   output: {
-    comments: function(node, comment) {
-        var text = comment.value;
-        var type = comment.type;
-        if (type == "comment2") {
-            // multiline comment
-            return /@preserve|@license|@cc_on/i.test(text);
-        }
+    comments: function (node, comment) {
+      if (comment.type === "comment2") {
+        // multiline comment
+        return /@preserve|@license|@cc_on/i.test(comment.value);
+      }
+      return false;
     }
   }
 });
