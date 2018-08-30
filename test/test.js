@@ -37,12 +37,21 @@ test("minify with sourcemaps", async () => {
   expect(result.map).toBeTruthy();
 });
 
+test("allow to disable source maps", async () => {
+  const bundle = await rollup({
+    input: "test/fixtures/sourcemap.js",
+    plugins: [uglify({ sourcemap: false })]
+  });
+  await bundle.generate({ format: "cjs" });
+});
+
 test("does not allow to pass sourceMap", async () => {
   try {
     const bundle = await rollup({
       input: "test/fixtures/sourcemap.js",
       plugins: [uglify({ sourceMap: false })]
     });
+    await bundle.generate({ format: "cjs" });
     expect(true).toBeFalsy();
   } catch (error) {
     expect(error.toString()).toMatch(/sourceMap option is removed/);

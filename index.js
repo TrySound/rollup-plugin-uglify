@@ -7,7 +7,8 @@ function uglify(userOptions = {}) {
   }
 
   const options = Object.assign({}, userOptions, {
-    sourceMap: userOptions.sourcemap !== false
+    sourceMap: userOptions.sourcemap !== false,
+    sourcemap: undefined
   });
 
   return {
