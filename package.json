@@ -24,6 +24,7 @@
   "license": "MIT",
   "dependencies": {
     "@babel/code-frame": "^7.0.0",
+    "jest-worker": "^23.2.0",
     "uglify-js": "^3.4.8"
   },
   "peerDependencies": {
