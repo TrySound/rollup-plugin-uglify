@@ -74,5 +74,7 @@ test("works with code splitting", async () => {
     plugins: [uglify()]
   });
   const { output } = await bundle.generate({ format: "esm" });
-  expect(output).toMatchSnapshot();
+  expect(
+    Object.entries(output).map(([key, { modules, ...value }]) => [key, value])
+  ).toMatchSnapshot();
 });
