@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-uglify",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "Rollup plugin to minify generated bundle",
   "main": "index.js",
   "files": [
