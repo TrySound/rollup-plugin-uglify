@@ -16,26 +16,24 @@ npm i rollup-plugin-uglify -D
 ## Usage
 
 ```js
-import { rollup } from 'rollup';
-import { uglify } from 'rollup-plugin-uglify';
+import { rollup } from "rollup";
+import { uglify } from "rollup-plugin-uglify";
 
 rollup({
-  entry: 'main.js',
-  plugins: [
-    uglify()
-  ]
+  entry: "main.js",
+  plugins: [uglify()]
 });
 ```
 
 ## Options
 
 ```js
-uglify(options, minifier)
+uglify(options);
 ```
 
-`options` – default: `{}`, type: `object`. [UglifyJS API options](https://github.com/mishoo/UglifyJS2/blob/master/README.md#minify-options)
+`options` - [uglifyJS API options](https://github.com/mishoo/UglifyJS2/blob/master/README.md#minify-options)
 
-`minifier` – default: `require('uglify-js').minify`, type: `function`. Module to use as a minifier. You can use other versions (or forks) of UglifyJS instead default one.
+`options.sourcemap` – default: `true`, type: `boolean`. The only own option which is used to generate source maps and pass them to rollup.
 
 ## Examples
 
@@ -46,7 +44,7 @@ If you'd like to preserve comments (for licensing for example), then you can spe
 ```js
 uglify({
   output: {
-    comments: function (node, comment) {
+    comments: function(node, comment) {
       if (comment.type === "comment2") {
         // multiline comment
         return /@preserve|@license|@cc_on/i.test(comment.value);
@@ -62,7 +60,7 @@ Alternatively, you can also choose to keep all comments (e.g. if a licensing hea
 ```js
 uglify({
   output: {
-    comments: 'all'
+    comments: "all"
   }
 });
 ```

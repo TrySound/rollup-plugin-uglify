@@ -1,8 +1,14 @@
 const { codeFrameColumns } = require("@babel/code-frame");
 const Worker = require("jest-worker").default;
 
-function uglify(userOptions) {
-  const options = Object.assign({ sourceMap: true }, userOptions);
+function uglify(userOptions = {}) {
+  if (userOptions.sourceMap != null) {
+    throw Error("sourceMap option is removed, use sourcemap instead");
+  }
+
+  const options = Object.assign({}, userOptions, {
+    sourceMap: userOptions.sourcemap !== false
+  });
 
   return {
     name: "uglify",
