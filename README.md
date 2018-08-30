@@ -3,7 +3,10 @@
 [travis-img]: https://travis-ci.org/TrySound/rollup-plugin-uglify.svg
 [travis]: https://travis-ci.org/TrySound/rollup-plugin-uglify
 
-[Rollup](https://github.com/rollup/rollup) plugin to minify generated bundle. Uses [UglifyJS](https://github.com/mishoo/UglifyJS2) under the hood.
+[Rollup](https://github.com/rollup/rollup) plugin to minify generated bundle. Uses [UglifyJS](https://github.com/mishoo/UglifyJS2) under the hood. There are a few improvements over native uglify:
+
+* uglify is run in worker for every chunk
+* errors are displayed with [babel code frame](https://babeljs.io/docs/en/next/babel-code-frame.html)
 
 _Note: uglify-js is able to transpile only es5 syntax. If you want to transpile es6+ syntax use [terser](https://github.com/TrySound/rollup-plugin-terser) instead_
 
@@ -20,7 +23,7 @@ import { rollup } from "rollup";
 import { uglify } from "rollup-plugin-uglify";
 
 rollup({
-  entry: "main.js",
+  input: "main.js",
   plugins: [uglify()]
 });
 ```
