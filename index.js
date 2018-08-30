@@ -7,7 +7,7 @@ function uglify(userOptions) {
   return {
     name: "uglify",
 
-    transformBundle(code) {
+    renderChunk(code) {
       const worker = new Worker(require.resolve("./transform.js"));
 
       return worker
