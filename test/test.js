@@ -9,7 +9,9 @@ test("minify", async () => {
     plugins: [uglify()]
   });
   const result = await bundle.generate({ format: "cjs" });
-  expect(result.code).toEqual('"use strict";window.a=5,window.a<3&&console.log(4);\n');
+  expect(result.code).toEqual(
+    '"use strict";window.a=5,window.a<3&&console.log(4);\n'
+  );
   expect(result.map).toBeFalsy();
 });
 
@@ -35,29 +37,6 @@ test("minify with sourcemaps", async () => {
   expect(result.map).toBeTruthy();
 });
 
-test("allow passing minifier", async () => {
-  const expectedCode = readFile("test/fixtures/plain-file.js", "utf-8");
-  const testOptions = {
-    foo: "bar"
-  };
-
-  const bundle = await rollup({
-    input: "test/fixtures/plain-file.js",
-    plugins: [
-      uglify(testOptions, (code, options) => {
-        expect(code.trim()).toEqual(expectedCode.trim());
-        expect(options).toEqual({
-          foo: "bar",
-          sourceMap: true
-        });
-        return { code };
-      })
-    ]
-  });
-  const result = await bundle.generate({ format: "es" });
-  expect(result.code.trim()).toEqual(expectedCode.trim());
-});
-
 test("throw error on uglify fail", async () => {
   try {
     const bundle = await rollup({
@@ -69,9 +48,19 @@ test("throw error on uglify fail", async () => {
         uglify()
       ]
     });
-    await bundle.generate({ format: "es" });
+    await bundle.generate({ format: "esm" });
     expect(true).toBeFalsy();
   } catch (error) {
     expect(error.toString()).toMatch(/Name expected/);
   }
+});
+
+test("works with code splitting", async () => {
+  const bundle = await rollup({
+    input: ["test/fixtures/chunk-1.js", "test/fixtures/chunk-2.js"],
+    experimentalCodeSplitting: true,
+    plugins: [uglify()]
+  });
+  const { output } = await bundle.generate({ format: "esm" });
+  expect(output).toMatchSnapshot();
 });

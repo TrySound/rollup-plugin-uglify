@@ -1,22 +1,29 @@
 const { codeFrameColumns } = require("@babel/code-frame");
-const { minify } = require("uglify-js");
+const Worker = require("jest-worker").default;
 
-function uglify(userOptions, minifier = minify) {
+function uglify(userOptions) {
   const options = Object.assign({ sourceMap: true }, userOptions);
 
   return {
     name: "uglify",
 
     transformBundle(code) {
-      const result = minifier(code, options);
-      if (result.error) {
-        const { message, line, col: column } = result.error;
-        console.error(
-          codeFrameColumns(code, { start: { line, column } }, { message })
-        );
-        throw result.error;
-      }
-      return result;
+      const worker = new Worker(require.resolve("./transform.js"));
+
+      return worker
+        .transform(code, options)
+        .then(result => {
+          worker.end();
+          return result;
+        })
+        .catch(error => {
+          worker.end();
+          const { message, line, col: column } = error;
+          console.error(
+            codeFrameColumns(code, { start: { line, column } }, { message })
+          );
+          throw error;
+        });
     }
   };
 }
