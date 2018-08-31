@@ -8,7 +8,7 @@
     "transform.js"
   ],
   "scripts": {
-    "test": "jest",
+    "test": "jest --runInBand",
     "prepublish": "yarn test"
   },
   "repository": {
