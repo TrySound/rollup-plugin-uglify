@@ -13,7 +13,7 @@ _Note: uglify-js is able to transpile only es5 syntax. If you want to transpile 
 ## Install
 
 ```sh
-npm i rollup-plugin-uglify -D
+yarn add rollup-plugin-uglify --dev
 ```
 
 ## Usage
