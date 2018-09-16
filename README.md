@@ -16,6 +16,8 @@ _Note: uglify-js is able to transpile only es5 syntax. If you want to transpile 
 yarn add rollup-plugin-uglify --dev
 ```
 
+*Note: this package requires rollup@0.66 and higher*
+
 ## Usage
 
 ```js
