@@ -90,3 +90,14 @@ test("works with code splitting", async () => {
   });
   expect(newOutput).toMatchSnapshot();
 });
+
+test("allow to pass not string values to worker", async () => {
+  const bundle = await rollup({
+    input: "test/fixtures/unminified.js",
+    plugins: [uglify({ mangle: { properties: { regex: /^_/ } } })]
+  });
+  const result = await bundle.generate({ format: "cjs" });
+  expect(result.code).toEqual(
+    '"use strict";window.a=5,window.a<3&&console.log(4);\n'
+  );
+});
