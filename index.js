@@ -45,3 +45,4 @@ function uglify(userOptions = {}) {
 }
 
 exports.uglify = uglify;
+exports.default = uglify;
