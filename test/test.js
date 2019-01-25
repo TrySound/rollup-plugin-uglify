@@ -9,10 +9,11 @@ test("minify", async () => {
     plugins: [uglify()]
   });
   const result = await bundle.generate({ format: "cjs" });
-  expect(result.code).toEqual(
+  const { code, map } = result.output[0]
+  expect(code).toEqual(
     '"use strict";window.a=5,window.a<3&&console.log(4);\n'
   );
-  expect(result.map).toBeFalsy();
+  expect(map).toBeFalsy();
 });
 
 test("minify via uglify options", async () => {
@@ -24,8 +25,9 @@ test("minify via uglify options", async () => {
     banner: "/* package name */",
     format: "cjs"
   });
-  expect(result.code).toEqual('/* package name */\n"use strict";\n');
-  expect(result.map).toBeFalsy();
+  const { code, map } = result.output[0]
+  expect(code).toEqual('/* package name */\n"use strict";\n');
+  expect(map).toBeFalsy();
 });
 
 test("minify with sourcemaps", async () => {
@@ -34,7 +36,8 @@ test("minify with sourcemaps", async () => {
     plugins: [uglify()]
   });
   const result = await bundle.generate({ format: "cjs", sourcemap: true });
-  expect(result.map).toBeTruthy();
+  const { code, map } = result.output[0]
+  expect(map).toBeTruthy();
 });
 
 test("allow to disable source maps", async () => {
@@ -85,7 +88,7 @@ test("works with code splitting", async () => {
   const { output } = await bundle.generate({ format: "esm" });
   const newOutput = {};
   Object.keys(output).forEach(key => {
-    const { modules, ...value } = output[key];
+    const { modules, facadeModuleId, ...value } = output[key];
     newOutput[key] = value;
   });
   expect(newOutput).toMatchSnapshot();
@@ -97,7 +100,7 @@ test("allow to pass not string values to worker", async () => {
     plugins: [uglify({ mangle: { properties: { regex: /^_/ } } })]
   });
   const result = await bundle.generate({ format: "cjs" });
-  expect(result.code).toEqual(
+  expect(result.output[0].code).toEqual(
     '"use strict";window.a=5,window.a<3&&console.log(4);\n'
   );
 });
