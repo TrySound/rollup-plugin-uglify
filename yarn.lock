@@ -816,10 +816,6 @@ aws4@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
 
-babel-core@^7.0.0-bridge.0:
-  version "7.0.0-bridge.0"
-  resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-7.0.0-bridge.0.tgz#95a492ddd90f9b4e9a4a1da14eb335b87b634ece"
-
 babel-jest@^24.0.0:
   version "24.0.0"
   resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-24.0.0.tgz#8a0c767f03f4a595fb921afdab13ff126edd00da"
