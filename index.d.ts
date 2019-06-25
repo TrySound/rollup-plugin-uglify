@@ -1,7 +1,7 @@
 import { Plugin } from 'rollup';
 import { MinifyOptions } from 'uglify-js';
 
-interface Options extends MinifyOptions {
+export interface Options extends MinifyOptions {
 
     /**
      * Specifically include/exclude chunk files names (minimatch pattern, or array of minimatch patterns), By default all chunk files will be minify.
