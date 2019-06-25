@@ -26,6 +26,7 @@
   "dependencies": {
     "@babel/code-frame": "^7.0.0",
     "jest-worker": "^24.0.0",
+    "rollup-pluginutils": "^2.8.1",
     "serialize-javascript": "^1.6.1",
     "uglify-js": "^3.4.9"
   },
