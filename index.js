@@ -2,17 +2,24 @@ const { codeFrameColumns } = require("@babel/code-frame");
 const Worker = require("jest-worker").default;
 const serialize = require("serialize-javascript");
 
+function reject(raw, rejected) {
+  return Object.keys(raw)
+    .filter(key => !rejected.includes(key))
+    .reduce((obj, key) => {
+      obj[key] = raw[key];
+      return obj;
+    }, {});
+}
+
 function uglify(userOptions = {}) {
   if (userOptions.sourceMap != null) {
     throw Error("sourceMap option is removed, use sourcemap instead");
   }
 
   const minifierOptions = serialize(
-    Object.assign({}, userOptions, {
-      sourceMap: userOptions.sourcemap !== false,
-      sourcemap: undefined,
-      numWorkers: undefined
-    })
+    reject(Object.assign({}, userOptions, {
+      sourceMap: userOptions.sourcemap !== false
+    }), [ "sourcemap" ])
   );
 
   return {
