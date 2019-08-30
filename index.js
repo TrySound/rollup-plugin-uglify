@@ -7,13 +7,17 @@ function uglify(userOptions = {}) {
     throw Error("sourceMap option is removed, use sourcemap instead");
   }
 
-  const minifierOptions = serialize(
-    Object.assign({}, userOptions, {
-      sourceMap: userOptions.sourcemap !== false,
-      sourcemap: undefined,
-      numWorkers: undefined
-    })
-  );
+  const normalizedOptions = Object.assign({}, userOptions, {
+    sourceMap: userOptions.sourcemap !== false
+  });
+
+  ["sourcemap"].forEach(key => {
+    if (normalizedOptions.hasOwnProperty(key)) {
+      delete normalizedOptions[key];
+    }
+  });
+
+  const minifierOptions = serialize(normalizedOptions);
 
   return {
     name: "uglify",
