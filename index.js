@@ -28,7 +28,11 @@ function uglify(userOptions = {}) {
       });
     },
 
-    renderChunk(code) {
+    renderChunk(code, chunk, outputConf) {
+      const illegalFormat = ["es"];
+      if (illegalFormat.indexOf(outputConf.format) !== -1) {
+        return code;
+      }
       return this.worker.transform(code, minifierOptions).catch(error => {
         const { message, line, col: column } = error;
         console.error(
