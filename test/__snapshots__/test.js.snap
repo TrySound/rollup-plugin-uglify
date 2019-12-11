@@ -13,6 +13,7 @@ Object {
     "isEntry": true,
     "map": null,
     "name": "chunk-1",
+    "type": "chunk",
   },
   "1": Object {
     "code": "var chunk2=\\"chunk-2\\";console.log(chunk2);
@@ -25,6 +26,7 @@ Object {
     "isEntry": true,
     "map": null,
     "name": "chunk-2",
+    "type": "chunk",
   },
 }
 `;
