@@ -82,7 +82,6 @@ test("throw error on uglify fail", async () => {
 test("works with code splitting", async () => {
   const bundle = await rollup({
     input: ["test/fixtures/chunk-1.js", "test/fixtures/chunk-2.js"],
-    /* experimentalCodeSplitting: true, */
     plugins: [uglify()]
   });
   const { output } = await bundle.generate({ format: "esm" });
