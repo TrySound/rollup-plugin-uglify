@@ -43,9 +43,9 @@ test("minify with sourcemaps", async () => {
 test("allow to disable source maps", async () => {
   const bundle = await rollup({
     input: "test/fixtures/sourcemap.js",
-    plugins: [uglify({ sourcemap: false })]
+    plugins: [uglify()]
   });
-  await bundle.generate({ format: "cjs" });
+  await bundle.generate({ format: "cjs", sourcemap: false });
 });
 
 test("does not allow to pass sourceMap", async () => {
@@ -82,14 +82,16 @@ test("throw error on uglify fail", async () => {
 test("works with code splitting", async () => {
   const bundle = await rollup({
     input: ["test/fixtures/chunk-1.js", "test/fixtures/chunk-2.js"],
-    experimentalCodeSplitting: true,
     plugins: [uglify()]
   });
   const { output } = await bundle.generate({ format: "esm" });
   const newOutput = {};
-  Object.keys(output).forEach(key => {
-    const { modules, facadeModuleId, ...value } = output[key];
-    newOutput[key] = value;
+  output.forEach((out) => {
+    // TODO rewrite with object rest after node 6 dropping
+    const value = Object.assign({}, out);
+    delete value.modules;
+    delete value.facadeModuleId;
+    newOutput[out.fileName] = value;
   });
   expect(newOutput).toMatchSnapshot();
 });
