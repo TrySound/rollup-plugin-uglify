@@ -2,30 +2,38 @@
 
 exports[`works with code splitting 1`] = `
 Object {
-  "0": Object {
-    "code": "var chunk1=\\"chunk-1\\";console.log(chunk1);
+  "chunk-1.js": Object {
+    "code": "console.log(\\"chunk-1\\");
 ",
     "dynamicImports": Array [],
     "exports": Array [],
     "fileName": "chunk-1.js",
+    "implicitlyLoadedBefore": Array [],
+    "importedBindings": Object {},
     "imports": Array [],
     "isDynamicEntry": false,
     "isEntry": true,
+    "isImplicitEntry": false,
     "map": null,
     "name": "chunk-1",
+    "referencedFiles": Array [],
     "type": "chunk",
   },
-  "1": Object {
-    "code": "var chunk2=\\"chunk-2\\";console.log(chunk2);
+  "chunk-2.js": Object {
+    "code": "console.log(\\"chunk-2\\");
 ",
     "dynamicImports": Array [],
     "exports": Array [],
     "fileName": "chunk-2.js",
+    "implicitlyLoadedBefore": Array [],
+    "importedBindings": Object {},
     "imports": Array [],
     "isDynamicEntry": false,
     "isEntry": true,
+    "isImplicitEntry": false,
     "map": null,
     "name": "chunk-2",
+    "referencedFiles": Array [],
     "type": "chunk",
   },
 }

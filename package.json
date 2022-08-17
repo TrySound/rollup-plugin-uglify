@@ -8,7 +8,7 @@
     "transform.js"
   ],
   "scripts": {
-    "test": "jest --runInBand",
+    "test": "jest",
     "prepublish": "yarn test"
   },
   "repository": {
@@ -24,20 +24,19 @@
   "author": "Bogdan Chadkin <trysound@yandex.ru>",
   "license": "MIT",
   "dependencies": {
-    "@babel/code-frame": "^7.0.0",
-    "jest-worker": "^24.0.0",
-    "serialize-javascript": "^2.1.2",
-    "uglify-js": "^3.4.9"
+    "@babel/code-frame": "^7.10.4",
+    "jest-worker": "^26.2.1",
+    "serialize-javascript": "^4.0.0",
+    "uglify-js": "^3.17.0"
   },
   "peerDependencies": {
-    "rollup": ">=0.66.0 <2"
+    "rollup": "^2.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.3.1",
-    "babel-jest": "^24.0.0",
-    "jest": "^24.0.0",
-    "prettier": "^1.16.1",
-    "rollup": "^1.27.10"
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.1",
+    "jest": "^26.2.2",
+    "prettier": "^2.0.5",
+    "rollup": "^2.23.1"
   }
 }

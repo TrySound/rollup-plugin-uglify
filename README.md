@@ -8,8 +8,6 @@
 * uglify is run in worker for every chunk
 * errors are displayed with [babel code frame](https://babeljs.io/docs/en/next/babel-code-frame.html)
 
-_Note: uglify-js is able to transpile only es5 syntax. If you want to transpile es6+ syntax use [terser](https://github.com/TrySound/rollup-plugin-terser) instead_
-
 ## Install
 
 ```sh
