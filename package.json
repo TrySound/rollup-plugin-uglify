@@ -2,15 +2,14 @@
   "name": "rollup-plugin-uglify",
   "version": "6.0.4",
   "description": "Rollup plugin to minify generated bundle",
-  "main": "index.js",
-  "files": [
-    "index.js",
-    "transform.js"
-  ],
+  "main": "dist/index.js",
   "scripts": {
-    "test": "jest --runInBand",
-    "prepublish": "yarn test"
+    "test": "jest --config=./jest.config.js",
+    "build": "rimraf ./dist && tsc"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TrySound/rollup-plugin-uglify.git"
@@ -24,20 +23,24 @@
   "author": "Bogdan Chadkin <trysound@yandex.ru>",
   "license": "MIT",
   "dependencies": {
-    "@babel/code-frame": "^7.0.0",
-    "jest-worker": "^24.0.0",
-    "serialize-javascript": "^2.1.2",
-    "uglify-js": "^3.4.9"
+    "rimraf": "^4.4.0",
+    "serialize-javascript": "^6.0.1",
+    "typescript": "^5.0.2",
+    "uglify-js": "^3.17.4"
   },
   "peerDependencies": {
-    "rollup": ">=0.66.0 <2"
+    "rollup": ">=3"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.3.1",
-    "babel-jest": "^24.0.0",
-    "jest": "^24.0.0",
-    "prettier": "^1.16.1",
-    "rollup": "^1.27.10"
+    "@babel/core": "^7.21.3",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.21.0",
+    "@types/serialize-javascript": "^5.0.2",
+    "@types/uglify-js": "^3.17.1",
+    "babel-jest": "^29.5.0",
+    "jest": "^29.5.0",
+    "jest-worker": "^29.5.0",
+    "prettier": "^2.8.5",
+    "rollup": "^3.20.0"
   }
 }
