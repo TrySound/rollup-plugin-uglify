@@ -5,7 +5,6 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "jest --config=./jest.config.js",
-    "prepublish": "yarn test",
     "build": "rimraf ./dist && tsc"
   },
   "files": [
