@@ -1264,11 +1264,6 @@
   dependencies:
     "@sinonjs/commons" "^2.0.0"
 
-"@types/babel-code-frame@^6.20.5":
-  version "6.20.5"
-  resolved "https://registry.yarnpkg.com/@types/babel-code-frame/-/babel-code-frame-6.20.5.tgz#baf30fe92857b380552c79333ab958b0c4e28307"
-  integrity sha512-dDya2ZMwQVDAzJWleisLxo8mCWoItbr7f4PT7TJE9WCHjt5nqO1aeFHtz2pukkOK3SsCKQ2g/VgDb9ElQIiUUg==
-
 "@types/babel__core@^7.1.14":
   version "7.20.0"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.20.0.tgz#61bc5a4cae505ce98e1e36c5445e4bee060d8891"
