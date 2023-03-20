@@ -1,1 +1,11 @@
 node_modules
+
+# IDEs
+.idea
+.code
+.vscode
+
+# Artifacts
+logs
+*.log
+dist
